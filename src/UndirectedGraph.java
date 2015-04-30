@@ -1,6 +1,7 @@
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 public class UndirectedGraph<V> implements GraphADT<V>{
@@ -62,13 +63,16 @@ public class UndirectedGraph<V> implements GraphADT<V>{
     @Override
     public Set<V> getNeighbors(V vertex) {
         //TODO
-        return null;
+	if(vertex==null)
+		throw new IllegalArgumentException();
+	Set<V> returnValue=new HashSet<V>(hashmap.get(vertex));
+        return returnValue;
     }
 
     @Override
     public void removeEdge(V v1, V v2) {
         //TODO
-    	//parameter validataion
+    	//parameter validation
     	if(v1==null||v2==null)
     		throw new IllegalArgumentException();
     	//check if they exist in the graph
@@ -90,7 +94,8 @@ public class UndirectedGraph<V> implements GraphADT<V>{
     @Override
     public Set<V> getAllVertices() {
         //TODO
-        return null;
+    	return hashmap.keySet();
+
     }
 
     /* (non-Javadoc)
