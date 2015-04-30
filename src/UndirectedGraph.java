@@ -21,13 +21,42 @@ public class UndirectedGraph<V> implements GraphADT<V>{
     @Override
     public boolean addVertex(V vertex) {
         //TODO
+    	if(vertex==null)
+    		throw new IllegalArgumentException();
+    	if(!hashmap.containsKey(vertex))
+    	hashmap.put(vertex,new ArrayList<V>());
+    		
         return false;
     }
 
     @Override
     public boolean addEdge(V v1, V v2) {
         //TODO
-        return false;
+    	if(v1==null||v2==null)
+    	throw new IllegalArgumentException();
+	//Check if v1 and v2 are in the graph
+	if(hashmap.containsKey(v1)&&hashmap.containsKey(v1))
+	{
+			
+	//Check if v1 equals v2 
+	if(!v1.equals(v2))
+	{
+	//check if the edge already exists	
+	if(!hashmap.get(v1).contains(v2)||!hashmap.get(v2).contains(v1))
+	{	//add the edge
+		hashmap.get(v1).add(v2);
+		hashmap.get(v2).add(v1);
+
+
+	}
+
+
+	}
+	}
+	else
+	{throw new IllegalArgumentException();}
+	
+	return false;
     }
 
     @Override
@@ -39,6 +68,22 @@ public class UndirectedGraph<V> implements GraphADT<V>{
     @Override
     public void removeEdge(V v1, V v2) {
         //TODO
+    	//parameter validataion
+    	if(v1==null||v2==null)
+    		throw new IllegalArgumentException();
+    	//check if they exist in the graph
+    	if(hashmap.containsKey(v1)&&hashmap.containsKey(v2))
+    	{
+        	//check if an edge exists between v1 and v2
+    			if(hashmap.get(v1).contains(v2)&&hashmap.get(v2).contains(v1))
+    			{
+    				//remove the edge from the graph
+    		    	hashmap.get(v1).remove(v2);
+    		    	hashmap.get(v2).remove(v1);
+    			}
+    		
+    	}
+    	
         return;
     }
 
