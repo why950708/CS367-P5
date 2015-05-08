@@ -125,17 +125,16 @@ public class SocialNetworkingApp {
 				} else {
 					List<String> sortingBuffer = new ArrayList(buffer);
 
-					Collections.sort(sortingBuffer);
 					System.out.print("[");
 					for (String buf : sortingBuffer) {
 						System.out.print(buf);
 						if (!sortingBuffer.get(sortingBuffer.size() - 1)
 								.equals(buf)) {
-							System.out.print(", ");
-						}
+							System.out.print(", ");}
 					}
 					System.out.println("]");
 				}
+				
 				break;
 			}
 
@@ -153,11 +152,9 @@ public class SocialNetworkingApp {
 					for (String buf : sortingBuffer) {
 
 						System.out.print(buf);
-						// if it is not the last element print a comma after
 						if (!sortingBuffer.get(sortingBuffer.size() - 1)
 								.equals(buf)) {
-							System.out.print(", ");
-						}
+							System.out.print(", ");}
 					}
 					System.out.println("]");
 				}
@@ -172,14 +169,17 @@ public class SocialNetworkingApp {
 							.println("You do not have any friends of friends");
 				} else {
 					// create a new list for the sorting
-					
+					List<String> sortingBuffer = new ArrayList(buffer);
 
-
+					Collections.sort(sortingBuffer);
 					System.out.print("[");
-					for (String buf : buffer) {
+					for (String buf : sortingBuffer) {
 						System.out.print(buf);
-						// if it is not the last element, print a comma ager
-						
+						// if it is not the last element, print a comma after
+						if (!sortingBuffer.get(sortingBuffer.size() - 1)
+								.equals(buf)) {
+							System.out.print(", ");
+						}
 					}
 					System.out.println("]");
 				}
@@ -205,7 +205,7 @@ public class SocialNetworkingApp {
 				// TODO
 				// check if they are friend
 				Set<String> buffer = graph.getNeighbors(currUser);
-				if (buffer.contains(otherPerson)) {
+				if (!buffer.contains(otherPerson)) {
 					System.out.println("You are already not friends with "
 							+ otherPerson);
 
