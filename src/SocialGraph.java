@@ -70,7 +70,7 @@ public class SocialGraph extends UndirectedGraph<String> {
 		// Sorry my partner
 		if (!(pFrom == null) && !(pTo == null))
 			// check if both person are in the map.
-			if (!hashmap.containsKey(pFrom) && !hashmap.containsKey(pTo))
+			if (hashmap.containsKey(pFrom) && hashmap.containsKey(pTo))
 				// check if they are the same
 				if (!pFrom.equals(pTo))
 					;
@@ -88,20 +88,28 @@ public class SocialGraph extends UndirectedGraph<String> {
 		ArrayList<String> path = new ArrayList<String>();
 		// the ArrayList to store the visted node
 		ArrayList<String> visted = new ArrayList<String>();
+		
 		// dequeue the first time
 		path.add(pFrom);
-		queue.add(path);
+		//queue.add(path);
 		visted.add(pFrom);
 
 		// while the last vertex from the dequeued path is not the pTo keep
 		// enqueuing the last vertex's neighbors
 		while (!path.get(path.size() - 1).equals(pTo)) {
+			
 			// enqueue
+			
 			for (String buffer : hashmap.get(path.get(path.size() - 1))) {
+				ArrayList<String> copy=new ArrayList<String>();
 				// check if the vertex has already being visited
 				if (!visted.contains(buffer)) {
+					
 					path.add(buffer);
-					queue.add(path);
+					visted.add(buffer);
+					for(String a:path)
+					{copy.add(a);}
+					queue.add(copy);
 					// remove the last node added to leave space for the other
 					path.remove(path.size() - 1);
 				}
